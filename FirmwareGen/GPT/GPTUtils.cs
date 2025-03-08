@@ -68,10 +68,11 @@ namespace FirmwareGen.GPT
                 // requirements. It is a violation of the Windows minimum Specification requirements
                 // to override this value for Windows 11 Products and your device will not be
                 // compatible or supported for Windows 11 if this gets changed.
-                if (WindowsLBACount < SixtyFourGigaBytes)
-                {
-                    WindowsLBACount = SixtyFourGigaBytes;
-                }
+                // Oh well..
+                //if (WindowsLBACount < SixtyFourGigaBytes)
+                //{
+                //    WindowsLBACount = SixtyFourGigaBytes;
+                //}
 
                 // In the case of the 4GB for Android strategy, we cannot do this or we risk to get userdata < 4GB
                 if (WindowsLBACount % BlockSize != 0)
@@ -90,10 +91,11 @@ namespace FirmwareGen.GPT
                 // requirements. It is a violation of the Windows minimum Specification requirements
                 // to override this value for Windows 11 Products and your device will not be
                 // compatible or supported for Windows 11 if this gets changed.
-                if (WindowsLBACount < SixtyFourGigaBytes)
-                {
-                    WindowsLBACount = SixtyFourGigaBytes;
-                }
+                // Oh well..
+                //if (WindowsLBACount < SixtyFourGigaBytes)
+                //{
+                //    WindowsLBACount = SixtyFourGigaBytes;
+                //}
 
                 if (WindowsLBACount % BlockSize != 0)
                 {
