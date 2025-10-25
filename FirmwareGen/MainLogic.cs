@@ -10,9 +10,9 @@ namespace FirmwareGen
         {
             string toolDirectory = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule?.FileName);
 
-            string wimlib = Path.Combine(toolDirectory, "wimlib-imagex.exe");
-            string Img2Ffu = Path.Combine(toolDirectory, "Img2Ffu.exe");
-            string DriverUpdater = Path.Combine(toolDirectory, "DriverUpdater.exe");
+            string wimlib = Path.Combine(toolDirectory, "wimlib", "wimlib-imagex.exe");
+            string Img2Ffu = Path.Combine(toolDirectory, "img2ffu", "Img2Ffu.exe");
+            string DriverUpdater = Path.Combine(toolDirectory, "DriverUpdater", "DriverUpdater.exe");
 
             if (!File.Exists(wimlib))
             {
@@ -39,9 +39,9 @@ namespace FirmwareGen
         {
             string toolDirectory = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule?.FileName);
 
-            string wimlib = Path.Combine(toolDirectory, "wimlib-imagex.exe");
-            string Img2Ffu = Path.Combine(toolDirectory, "Img2Ffu.exe");
-            string DriverUpdater = Path.Combine(toolDirectory, "DriverUpdater.exe");
+            string wimlib = Path.Combine(toolDirectory, "wimlib", "wimlib-imagex.exe");
+            string Img2Ffu = Path.Combine(toolDirectory, "img2ffu", "Img2Ffu.exe");
+            string DriverUpdater = Path.Combine(toolDirectory, "DriverUpdater", "DriverUpdater.exe");
 
             const string SystemPartition = "Y:";
 
@@ -77,7 +77,7 @@ namespace FirmwareGen
             VolumeUtils.DismountVirtualHardDisk(TmpVHD);
 
             Logging.Log("Making FFU");
-            VolumeUtils.RunProgram(Img2Ffu, $@"-i {TmpVHD} -d VenHw(860845C1-BE09-4355-8BC1-30D64FF8E63A) -l false -b 4000 -e .\provisioning-partitions.txt -i .\LUN1.vhdx -d VenHw(8D90D477-39A3-4A38-AB9E-586FF69ED051) -l true -b 4000 -e .\provisioning-partitions.txt -i .\LUN2.vhdx -d VenHw(EDF85868-87EC-4F77-9CDA-5F10DF2FE601) -l true -b 4000 -e .\provisioning-partitions.txt -i .\LUN3.vhdx -d VenHw(1AE69024-8AEB-4DF8-BC98-0032DBDF5024) -l true -b 4000 -e .\provisioning-partitions.txt -i .\LUN4.vhdx -d VenHw(D33F1985-F107-4A85-BE38-68DC7AD32CEA) -l true -b 4000 -e .\provisioning-partitions.txt -i .\LUN5.vhdx -d VenHw(4BA1D05F-088E-483F-A97E-B19B9CCF59B0) -l true -b 4000 -e .\provisioning-partitions.txt -f ""{options.Output}\{deviceProfile.FFUFileName}"" -c {deviceProfile.DiskSectorSize * 4} -s {deviceProfile.DiskSectorSize} -p ""{string.Join(";", deviceProfile.PlatformIDs)}"" -o {options.WindowsVer} -v V2 -t ""{options.SecureBootSigningCommand}""");
+            VolumeUtils.RunProgram(Img2Ffu, $@"-i {TmpVHD} -d VenHw(860845C1-BE09-4355-8BC1-30D64FF8E63A) -l false -b 4000 -e .\img2ffu\provisioning-partitions.txt -i .\VHDX\LUN1.vhdx -d VenHw(8D90D477-39A3-4A38-AB9E-586FF69ED051) -l true -b 4000 -e .\img2ffu\provisioning-partitions.txt -i .\VHDX\LUN2.vhdx -d VenHw(EDF85868-87EC-4F77-9CDA-5F10DF2FE601) -l true -b 4000 -e .\img2ffu\provisioning-partitions.txt -i .\VHDX\LUN3.vhdx -d VenHw(1AE69024-8AEB-4DF8-BC98-0032DBDF5024) -l true -b 4000 -e .\img2ffu\provisioning-partitions.txt -i .\VHDX\LUN4.vhdx -d VenHw(D33F1985-F107-4A85-BE38-68DC7AD32CEA) -l true -b 4000 -e .\img2ffu\provisioning-partitions.txt -i .\VHDX\LUN5.vhdx -d VenHw(4BA1D05F-088E-483F-A97E-B19B9CCF59B0) -l true -b 4000 -e .\img2ffu\provisioning-partitions.txt -f ""{options.Output}\{deviceProfile.FFUFileName}"" -c {deviceProfile.DiskSectorSize * 4} -s {deviceProfile.DiskSectorSize} -p ""{string.Join(";", deviceProfile.PlatformIDs)}"" -o {options.WindowsVer} -v V2 -t ""{options.SecureBootSigningCommand}""");
 
             Logging.Log("Deleting Temp VHD");
             File.Delete(TmpVHD);

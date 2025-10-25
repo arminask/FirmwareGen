@@ -60,7 +60,7 @@ namespace FirmwareGen
         public static void ApplyWindowsImageFromDVD(string wimlib, string WindowsDVD, string WindowsIndex, string VHDLetter)
         {
             Logging.Log("Applying image");
-            RunProgram(wimlib, $@"apply {WindowsDVD}\sources\install.wim {WindowsIndex} {VHDLetter} --compact=LZX");
+            RunProgram(wimlib, $@"apply {WindowsDVD}\install.wim {WindowsIndex} {VHDLetter} --compact=LZX");
         }
 
         public static void CopyFile(string Source, string Dest)

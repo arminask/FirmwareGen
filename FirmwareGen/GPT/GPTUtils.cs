@@ -12,7 +12,7 @@ namespace FirmwareGen.GPT
             ulong FirstLBA = 1;
             ulong LastLBA = (DiskSize / SectorSize) - 1;
 
-            ulong PartitionArrayLBACount = 4;
+            ulong PartitionArrayLBACount = 2;
 
             if ((ulong)DefaultPartitionTable.Length * 128 > PartitionArrayLBACount * SectorSize)
             {
@@ -185,7 +185,7 @@ namespace FirmwareGen.GPT
             Console.ForegroundColor = ogColor;
         }
 
-        private static byte[] MakeGPT(ulong FirstLBA, ulong LastLBA, ulong SectorSize, GPTPartition[] Partitions, Guid DiskGuid, ulong PartitionArrayLBACount = 4, bool IsBackupGPT = false)
+        private static byte[] MakeGPT(ulong FirstLBA, ulong LastLBA, ulong SectorSize, GPTPartition[] Partitions, Guid DiskGuid, ulong PartitionArrayLBACount = 2, bool IsBackupGPT = false)
         {
             // -------------------
             // 0: Reserved/MBR
